@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哲数理化跨学科智能体1.0 - 六脉神剑数学哲学系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+        }
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .philosophy-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .philosophy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .sword-glow {
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+        .problem-card {
+            transition: all 0.3s ease;
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fbbf24;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fbbf24;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .feature-icon {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                        <span class="text-slate-900 font-bold text-sm">哲</span>
+                    </div>
+                    <span class="text-xl font-bold text-amber-400">哲数理化智能体</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-amber-400">首页</a>
+                    <a href="philosophy.html" class="nav-link text-white">六脉神剑</a>
+                    <a href="problems.html" class="nav-link text-white">题型库</a>
+                    <a href="reports.html" class="nav-link text-white">项目报告</a>
+                    <a href="about.html" class="nav-link text-white">关于项目</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-md">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 text-amber-400">首页</a>
+                <a href="philosophy.html" class="block py-2 text-white">六脉神剑</a>
+                <a href="problems.html" class="block py-2 text-white">题型库</a>
+                <a href="reports.html" class="block py-2 text-white">项目报告</a>
+                <a href="about.html" class="block py-2 text-white">关于项目</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-90"></div>
+            <div class="absolute inset-0">
+                <div id="hero-canvas" class="w-full h-full"></div>
+            </div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <div class="floating-element">
+                <h1 class="hero-title text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    武文豪-三会数学 | 哲数理化跨学科智能体
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-amber-300 mb-8 font-medium text-glow">
+                    六脉神剑 · 哲学指导 · 智能解题
+                </h2>
+            </div>
+            
+            <div class="bg-slate-800/50 backdrop-blur-md rounded-2xl p-8 mb-12 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold mb-6 text-amber-400">
+                    教育理念的完美融合
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6 text-left">
+                    <div class="bg-slate-700/50 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold text-blue-400 mb-3">从教育从业者角度</h4>
+                        <p class="text-gray-300"><strong class="text-blue-400">因材施教</strong> - 根据每个学生的特点和需求，提供个性化的学习指导</p>
+                    </div>
+                    <div class="bg-slate-700/50 rounded-lg p-6">
+                        <h4 class="text-lg font-semibold text-green-400 mb-3">从受教育者角度</h4>
+                        <p class="text-gray-300"><strong class="text-green-400">点燃梦想</strong> - 激发学习兴趣，培养哲学思维，建立数学自信</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-lg md:text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed">
+                将马克思主义哲学与数学教育深度融合，以毛泽东思想的"六脉神剑"为指导，
+                构建智能化的数学辅导系统，培养学生的转化思维和哲学素养。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button onclick="scrollToSection('philosophy')" class="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:from-amber-400 hover:to-amber-500 transition-all duration-300 sword-glow">
+                    探索六脉神剑
+                </button>
+                <button onclick="scrollToSection('features')" class="border-2 border-amber-400 text-amber-400 px-8 py-4 rounded-lg font-bold text-lg hover:bg-amber-400 hover:text-slate-900 transition-all duration-300">
+                    了解功能特色
+                </button>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 六脉神剑哲学体系 -->
+    <section id="philosophy" class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">六脉神剑哲学体系</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    基于毛泽东思想的六大哲学剑法，将马克思主义哲学与数学解题深度融合
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="philosophy-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">主</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4">主矛盾剑</h3>
+                    <p class="text-slate-300 mb-4">
+                        《矛盾论》在数学解题中的应用，识别题目主要矛盾，抓住核心问题
+                    </p>
+                    <div class="text-sm text-slate-400">
+                        应用场景：函数最值、几何证明、方程求解
+                    </div>
+                </div>
+                
+                <div class="philosophy-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">量</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4">量质变剑</h3>
+                    <p class="text-slate-300 mb-4">
+                        质量互变律与数学临界点分析，把握量变到质变的关键节点
+                    </p>
+                    <div class="text-sm text-slate-400">
+                        应用场景：极限问题、临界分析、参数讨论
+                    </div>
+                </div>
+                
+                <div class="philosophy-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">否</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4">否定之否定剑</h3>
+                    <p class="text-slate-300 mb-4">
+                        否定之否定律与错题反思，通过错误反思实现理论升级
+                    </p>
+                    <div class="text-sm text-slate-400">
+                        应用场景：错题分析、思维升级、认知迭代
+                    </div>
+                </div>
+                
+                <div class="philosophy-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">实</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4">实践论剑</h3>
+                    <p class="text-slate-300 mb-4">
+                        《实践论》与实验设计思维，通过实践验证理论的正确性
+                    </p>
+                    <div class="text-sm text-slate-400">
+                        应用场景：实验设计、验证证明、实践应用
+                    </div>
+                </div>
+                
+                <div class="philosophy-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">持</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4">持久战剑</h3>
+                    <p class="text-slate-300 mb-4">
+                        《论持久战》与长期学习策略，制定科学的备考和攻坚策略
+                    </p>
+                    <div class="text-sm text-slate-400">
+                        应用场景：备考规划、难点攻克、长期目标
+                    </div>
+                </div>
+                
+                <div class="philosophy-card rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">唯</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-4">唯物论剑</h3>
+                    <p class="text-slate-300 mb-4">
+                        物质第一性与科学精神，坚持数据导向的科学思维方式
+                    </p>
+                    <div class="text-sm text-slate-400">
+                        应用场景：数据分析、事实判断、科学推理
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="philosophy.html" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:from-amber-400 hover:to-amber-500 transition-all duration-300">
+                    深入了解六脉神剑 →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特色 -->
+    <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">核心功能特色</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    基于AI技术的智能数学辅导系统，提供个性化学习体验
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">智能识别</h3>
+                    <p class="text-slate-300">
+                        自动识别题目类型，匹配对应的六脉神剑剑法和解题策略
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">哲学批注</h3>
+                    <p class="text-slate-300">
+                        每道题目都配有马克思主义哲学批注，培养哲学思维素养
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">思维可视化</h3>
+                    <p class="text-slate-300">
+                        动态展示解题思维过程，让抽象的哲学思维变得具体可见
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">个性化学习</h3>
+                    <p class="text-slate-300">
+                        根据学生水平智能推荐题目，建立个人错题档案和进步追踪
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 题型库预览 -->
+    <section id="problems-preview" class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">题型库概览</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    基于人教版教材构建的完整数学知识体系，涵盖初中高中25类母题
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-6">初中数学 (15类母题)</h3>
+                    <div class="space-y-4">
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">一次函数应用</span>
+                                <span class="text-amber-400 text-sm">主矛盾剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">二次函数图像</span>
+                                <span class="text-amber-400 text-sm">量质变剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">全等三角形证明</span>
+                                <span class="text-amber-400 text-sm">实践论剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">相似三角形应用</span>
+                                <span class="text-amber-400 text-sm">唯物论剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">勾股定理综合</span>
+                                <span class="text-amber-400 text-sm">否定之否定剑</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-amber-400 mb-6">高中数学 (10类母题)</h3>
+                    <div class="space-y-4">
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">导数综合</span>
+                                <span class="text-amber-400 text-sm">主矛盾剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">三角函数</span>
+                                <span class="text-amber-400 text-sm">量质变剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">数列通项与求和</span>
+                                <span class="text-amber-400 text-sm">持久战剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">立体几何</span>
+                                <span class="text-amber-400 text-sm">实践论剑</span>
+                            </div>
+                        </div>
+                        <div class="problem-card bg-slate-700/50 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white font-medium">圆锥曲线</span>
+                                <span class="text-amber-400 text-sm">唯物论剑</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="problems.html" class="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:from-amber-400 hover:to-amber-500 transition-all duration-300">
+                    进入题型库 →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目亮点 -->
+    <section id="highlights" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">项目创新亮点</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    融合AI技术与哲学思维，打造前所未有的数学教育体验
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-800/50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-4">AI驱动的哲学教育</h3>
+                    <p class="text-slate-300">
+                        将抽象的哲学概念具象化为解题工具，通过AI技术实现个性化哲学指导
+                    </p>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-4">动态知识库</h3>
+                    <p class="text-slate-300">
+                        基于用户反馈持续优化母题分类，自动识别和补充新的题型
+                    </p>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-4">可视化思维</h3>
+                    <p class="text-slate-300">
+                        用图表展示哲学思维的应用过程，动态演示解题思路的演进
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-slate-900/50 py-12 border-t border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                    <span class="text-slate-900 font-bold text-sm">哲</span>
+                </div>
+                <span class="text-xl font-bold text-amber-400">哲数理化跨学科智能体</span>
+            </div>
+            <p class="text-slate-400 mb-4">
+                武文豪-三会数学 | 基于马克思主义哲学的智能数学教育系统
+            </p>
+            <p class="text-slate-500 text-sm">
+                © 2024 哲数理化跨学科智能体项目. 融合哲学思维与AI技术，创新数学教育模式.
+            </p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

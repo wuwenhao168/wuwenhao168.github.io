@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能题型库 - 哲数理化跨学科智能体</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+        }
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .problem-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(251, 191, 36, 0.5);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fbbf24;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fbbf24;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: #fbbf24;
+            color: #0f172a;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #1e293b;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px;
+        }
+        .sword-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                        <span class="text-slate-900 font-bold text-sm">哲</span>
+                    </div>
+                    <span class="text-xl font-bold text-amber-400">哲数理化智能体</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white">首页</a>
+                    <a href="philosophy.html" class="nav-link text-white">六脉神剑</a>
+                    <a href="problems.html" class="nav-link text-amber-400">题型库</a>
+                    <a href="reports.html" class="nav-link text-white">项目报告</a>
+                    <a href="about.html" class="nav-link text-white">关于项目</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="pt-24 pb-12 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-6">
+                智能题型库
+            </h1>
+            <p class="text-xl text-slate-300 max-w-4xl mx-auto">
+                基于人教版教材构建的完整数学知识体系，涵盖初中高中25类母题，
+                每道题目都配有六脉神剑哲学指导
+            </p>
+        </div>
+    </section>
+
+    <!-- 筛选器 -->
+    <section class="pb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="filter-btn active bg-slate-700 text-white px-6 py-3 rounded-lg font-medium" data-filter="all">
+                    全部题目
+                </button>
+                <button class="filter-btn bg-slate-700 text-white px-6 py-3 rounded-lg font-medium" data-filter="junior">
+                    初中数学
+                </button>
+                <button class="filter-btn bg-slate-700 text-white px-6 py-3 rounded-lg font-medium" data-filter="senior">
+                    高中数学
+                </button>
+                <button class="filter-btn bg-slate-700 text-white px-6 py-3 rounded-lg font-medium" data-filter="主矛盾剑">
+                    主矛盾剑
+                </button>
+                <button class="filter-btn bg-slate-700 text-white px-6 py-3 rounded-lg font-medium" data-filter="量质变剑">
+                    量质变剑
+                </button>
+                <button class="filter-btn bg-slate-700 text-white px-6 py-3 rounded-lg font-medium" data-filter="实践论剑">
+                    实践论剑
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 题目网格 -->
+    <section class="pb-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div id="problems-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 题目卡片将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 题目详情模态框 -->
+    <div id="problem-modal" class="modal">
+        <div class="modal-content p-8">
+            <div class="flex justify-between items-start mb-6">
+                <h2 id="modal-title" class="text-2xl font-bold text-amber-400"></h2>
+                <button id="close-modal" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            
+            <div id="modal-content">
+                <!-- 模态框内容将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 统计信息 -->
+    <section class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">题型库统计</h2>
+                <p class="text-xl text-slate-300">
+                    持续更新和完善中的智能题型库
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-amber-400 mb-2" id="total-problems">156</div>
+                    <div class="text-slate-300">总题目数</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-amber-400 mb-2">25</div>
+                    <div class="text-slate-300">母题类型</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-amber-400 mb-2">6</div>
+                    <div class="text-slate-300">哲学剑法</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-amber-400 mb-2">100%</div>
+                    <div class="text-slate-300">覆盖教材</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-slate-900/50 py-12 border-t border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                    <span class="text-slate-900 font-bold text-sm">哲</span>
+                </div>
+                <span class="text-xl font-bold text-amber-400">哲数理化跨学科智能体</span>
+            </div>
+            <p class="text-slate-400 mb-4">
+                武文豪-三会数学  | 基于马克思主义哲学的智能数学教育系统
+            </p>
+            <p class="text-slate-500 text-sm">
+                © 2024 哲数理化跨学科智能体项目. 融合哲学思维与AI技术，创新数学教育模式.
+            </p>
+        </div>
+    </footer>
+
+    <script src="problems.js"></script>
+</body>
+</html>

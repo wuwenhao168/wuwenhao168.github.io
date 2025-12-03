@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六脉神剑哲学体系 - 哲数理化跨学科智能体</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+        }
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sword-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .sword-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .sword-card:hover::before {
+            left: 100%;
+        }
+        .sword-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fbbf24;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fbbf24;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .philosophy-quote {
+            position: relative;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 4px solid #fbbf24;
+            border-radius: 0 8px 8px 0;
+        }
+        .philosophy-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: #fbbf24;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            font-family: serif;
+        }
+        .example-card {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            transition: all 0.3s ease;
+        }
+        .example-card:hover {
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.2);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                        <span class="text-slate-900 font-bold text-sm">哲</span>
+                    </div>
+                    <span class="text-xl font-bold text-amber-400">哲数理化智能体</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white">首页</a>
+                    <a href="philosophy.html" class="nav-link text-amber-400">六脉神剑</a>
+                    <a href="problems.html" class="nav-link text-white">题型库</a>
+                    <a href="reports.html" class="nav-link text-white">项目报告</a>
+                    <a href="about.html" class="nav-link text-white">关于项目</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="pt-24 pb-12 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-6">
+                六脉神剑哲学体系
+            </h1>
+            <p class="text-xl text-slate-300 max-w-4xl mx-auto">
+                基于毛泽东思想的六大哲学剑法，将马克思主义哲学与数学解题深度融合，
+                构建系统化的思维训练框架
+            </p>
+        </div>
+    </section>
+
+    <!-- 六脉神剑详细介绍 -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 mb-20">
+                <!-- 主矛盾剑 -->
+                <div class="sword-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mr-6">
+                            <span class="text-2xl font-bold text-white">主</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">主矛盾剑</h3>
+                            <p class="text-slate-300">《矛盾论》在数学解题中的应用</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-quote mb-6">
+                        <p class="text-slate-200 italic">
+                            在复杂的事物的发展过程中，有许多的矛盾存在，其中必有一种是主要的矛盾，
+                            由于它的存在和发展，规定或影响着其他矛盾的存在和发展。
+                        </p>
+                        <p class="text-amber-400 text-sm mt-2">—— 毛泽东《矛盾论》</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-amber-400">核心思想</h4>
+                        <p class="text-slate-300">
+                            识别题目中的主要矛盾，抓住核心问题，避免在次要问题上分散精力。
+                            通过分析主要矛盾的性质和特点，找到解决问题的突破口。
+                        </p>
+                        
+                        <h4 class="text-lg font-semibold text-amber-400">应用场景</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">函数最值</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">几何证明</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">方程求解</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">优化问题</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 量质变剑 -->
+                <div class="sword-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-6">
+                            <span class="text-2xl font-bold text-white">量</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">量质变剑</h3>
+                            <p class="text-slate-300">质量互变律与数学临界点分析</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-quote mb-6">
+                        <p class="text-slate-200 italic">
+                            事物的量的变化，在一定限度内，不会引起质的变化，
+                            但是一超过这个限度，就会引起质的变化。
+                        </p>
+                        <p class="text-amber-400 text-sm mt-2">—— 马克思主义哲学原理</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-amber-400">核心思想</h4>
+                        <p class="text-slate-300">
+                            把握量变到质变的关键节点，分析临界点和突变点，
+                            理解数学对象在特定条件下的性质变化规律。
+                        </p>
+                        
+                        <h4 class="text-lg font-semibold text-amber-400">应用场景</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">极限问题</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">临界分析</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">参数讨论</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">分段函数</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 否定之否定剑 -->
+                <div class="sword-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-6">
+                            <span class="text-2xl font-bold text-white">否</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">否定之否定剑</h3>
+                            <p class="text-slate-300">否定之否定律与错题反思</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-quote mb-6">
+                        <p class="text-slate-200 italic">
+                            事物的发展是通过否定实现的，但否定不是简单的抛弃，
+                            而是扬弃，是既克服又保留，是螺旋式上升的过程。
+                        </p>
+                        <p class="text-amber-400 text-sm mt-2">—— 马克思主义哲学原理</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-amber-400">核心思想</h4>
+                        <p class="text-slate-300">
+                            通过错题反思实现理论升级，从错误中学习，
+                            在否定中实现认知的螺旋式上升和思维能力的提升。
+                        </p>
+                        
+                        <h4 class="text-lg font-semibold text-amber-400">应用场景</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">错题分析</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">思维升级</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">认知迭代</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">反思总结</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实践论剑 -->
+                <div class="sword-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-6">
+                            <span class="text-2xl font-bold text-white">实</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">实践论剑</h3>
+                            <p class="text-slate-300">《实践论》与实验设计思维</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-quote mb-6">
+                        <p class="text-slate-200 italic">
+                            实践、认识、再实践、再认识，这种形式，循环往复以至无穷，
+                            而实践和认识之每一循环的内容，都比较地进到了高一级的程度。
+                        </p>
+                        <p class="text-amber-400 text-sm mt-2">—— 毛泽东《实践论》</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-amber-400">核心思想</h4>
+                        <p class="text-slate-300">
+                            通过实践验证理论的正确性，在解题过程中不断试验和验证，
+                            通过实践-认识的循环提升解题能力。
+                        </p>
+                        
+                        <h4 class="text-lg font-semibold text-amber-400">应用场景</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">实验设计</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">验证证明</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">实践应用</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">探索发现</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 持久战剑 -->
+                <div class="sword-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mr-6">
+                            <span class="text-2xl font-bold text-white">持</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">持久战剑</h3>
+                            <p class="text-slate-300">《论持久战》与长期学习策略</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-quote mb-6">
+                        <p class="text-slate-200 italic">
+                            战争的伟力之最深厚的根源，存在于民众之中。
+                            动员了全国的老百姓，就造成了陷敌于灭顶之灾的汪洋大海。
+                        </p>
+                        <p class="text-amber-400 text-sm mt-2">—— 毛泽东《论持久战》</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-amber-400">核心思想</h4>
+                        <p class="text-slate-300">
+                            制定科学的长期学习策略，合理分配学习资源，
+                            在持久的学习过程中积累优势，最终攻克难点。
+                        </p>
+                        
+                        <h4 class="text-lg font-semibold text-amber-400">应用场景</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">备考规划</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">难点攻克</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">长期目标</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">资源调配</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 唯物论剑 -->
+                <div class="sword-card rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mr-6">
+                            <span class="text-2xl font-bold text-white">唯</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">唯物论剑</h3>
+                            <p class="text-slate-300">物质第一性与科学精神</p>
+                        </div>
+                    </div>
+                    
+                    <div class="philosophy-quote mb-6">
+                        <p class="text-slate-200 italic">
+                            物质是第一性的，意识是第二性的，意识是物质的产物。
+                            这一原理要求我们必须坚持实事求是的科学态度。
+                        </p>
+                        <p class="text-amber-400 text-sm mt-2">—— 马克思主义哲学原理</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-amber-400">核心思想</h4>
+                        <p class="text-slate-300">
+                            坚持数据导向的科学思维方式，尊重客观事实，
+                            通过实证分析得出科学结论，反对主观臆断。
+                        </p>
+                        
+                        <h4 class="text-lg font-semibold text-amber-400">应用场景</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">数据分析</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">事实判断</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">科学推理</span>
+                            </div>
+                            <div class="example-card rounded-lg p-3 text-center">
+                                <span class="text-white text-sm">客观验证</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 综合应用示例 -->
+    <section class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">综合应用示例</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    通过具体题目展示六脉神剑哲学体系在数学解题中的综合应用
+                </p>
+            </div>
+            
+            <div class="bg-slate-700/50 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-amber-400 mb-6">例题：二次函数综合题</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-4">题目内容</h4>
+                        <div class="bg-slate-600/50 rounded-lg p-4 text-slate-200">
+                            已知二次函数 y = x² - 4x + 3，求：<br>
+                            1. 函数的顶点坐标和对称轴<br>
+                            2. 函数的最小值<br>
+                            3. 当x在什么范围时，y > 0
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-4">六脉神剑应用</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">主</span>
+                                </div>
+                                <span class="text-slate-300">识别主要矛盾：顶点决定函数性质</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">量</span>
+                                </div>
+                                <span class="text-slate-300">分析临界点：x=2时取得最小值</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">实</span>
+                                </div>
+                                <span class="text-slate-300">实践验证：代入特殊点验证结果</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">唯</span>
+                                </div>
+                                <span class="text-slate-300">客观分析：基于数学事实推理</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-6 bg-slate-600/30 rounded-lg">
+                    <h4 class="text-lg font-semibold text-amber-400 mb-4">解题思路</h4>
+                    <div class="text-slate-300 space-y-2">
+                        <p>1. <strong class="text-red-400">主矛盾剑</strong>：抓住顶点这个主要矛盾，通过配方法求出顶点坐标(2,-1)</p>
+                        <p>2. <strong class="text-blue-400">量质变剑</strong>：分析x=2这个临界点，函数在x=2处取得最小值-1</p>
+                        <p>3. <strong class="text-purple-400">实践论剑</strong>：代入x=0,1,2,3,4等特殊点验证函数值</p>
+                        <p>4. <strong class="text-indigo-400">唯物论剑</strong>：基于函数图像的客观事实，确定y>0时x的范围</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-slate-900/50 py-12 border-t border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                    <span class="text-slate-900 font-bold text-sm">哲</span>
+                </div>
+                <span class="text-xl font-bold text-amber-400">哲数理化跨学科智能体</span>
+            </div>
+            <p class="text-slate-400 mb-4">
+                武文豪-三会数学  | 基于马克思主义哲学的智能数学教育系统
+            </p>
+            <p class="text-slate-500 text-sm">
+                © 2024 哲数理化跨学科智能体项目. 融合哲学思维与AI技术，创新数学教育模式.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 卡片动画
+            anime({
+                targets: '.sword-card',
+                translateY: [50, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(200),
+                duration: 800,
+                easing: 'easeOutExpo'
+            });
+        });
+    </script>
+</body>
+</html>

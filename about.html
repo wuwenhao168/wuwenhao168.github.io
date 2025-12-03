@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于项目 - 哲数理化跨学科智能体</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+        }
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .team-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fbbf24;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fbbf24;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .feature-icon {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .philosophy-quote {
+            position: relative;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 4px solid #fbbf24;
+            border-radius: 0 8px 8px 0;
+        }
+        .philosophy-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: #fbbf24;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            font-family: serif;
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                        <span class="text-slate-900 font-bold text-sm">哲</span>
+                    </div>
+                    <span class="text-xl font-bold text-amber-400">哲数理化智能体</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white">首页</a>
+                    <a href="philosophy.html" class="nav-link text-white">六脉神剑</a>
+                    <a href="problems.html" class="nav-link text-white">题型库</a>
+                    <a href="reports.html" class="nav-link text-white">项目报告</a>
+                    <a href="about.html" class="nav-link text-amber-400">关于项目</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="pt-24 pb-12 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-6">
+                关于项目
+            </h1>
+            <p class="text-xl text-slate-300 max-w-4xl mx-auto">
+                武文豪-三会数学打造的哲数理化跨学科智能体项目
+            </p>
+        </div>
+    </section>
+
+    <!-- 项目愿景 -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">项目愿景</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    让每个学生都能在马克思主义哲学指导下，掌握数学思维，点燃学习梦想
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="philosophy-quote mb-8">
+                        <p class="text-slate-200 italic text-lg leading-relaxed">
+                            教育的根本任务是立德树人，我们的目标不仅是传授知识，
+                            更重要的是培养学生的哲学思维和科学精神，
+                            让每个孩子都能在数学学习中找到自信和快乐。
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-amber-400 mb-2">因材施教</h3>
+                                <p class="text-slate-300">
+                                    根据每个学生的认知水平和学习特点，提供个性化的学习指导和思维训练，
+                                    让每个孩子都能在适合自己的节奏中成长。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-amber-400 mb-2">点燃梦想</h3>
+                                <p class="text-slate-300">
+                                    通过哲学思维的培养，激发学生的学习兴趣和求知欲望，
+                                    让数学学习不再是枯燥的记忆，而是充满乐趣的探索。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-amber-400 mb-2">科学思维</h3>
+                                <p class="text-slate-300">
+                                    培养学生的逻辑思维能力、抽象思维能力和创新思维能力，
+                                    为未来的学习和发展奠定坚实的思维基础。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="floating-element">
+                    <div class="bg-slate-800/50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-amber-400 mb-6 text-center">核心理念</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">六脉神剑</div>
+                                <div class="text-slate-300 text-sm">哲学指导体系</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-green-400 mb-2">因材施教</div>
+                                <div class="text-slate-300 text-sm">个性化教育</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-400 mb-2">点燃梦想</div>
+                                <div class="text-slate-300 text-sm">激发学习兴趣</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-orange-400 mb-2">科学思维</div>
+                                <div class="text-slate-300 text-sm">培养思维能力</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队成员 -->
+    <section class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">团队成员</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    教育专家与AI技术专家的智慧碰撞，共同打造教育创新项目
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="team-card rounded-2xl p-8">
+                    <div class="flex items-center space-x-6 mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                            <span class="text-3xl font-bold text-white">武</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">武文豪</h3>
+                            <p class="text-slate-300">三会数学创始人</p>
+                            <p class="text-slate-400 text-sm">数学教育专家</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-2">专业背景</h4>
+                            <p class="text-slate-300">
+                                资深数学教育专家，拥有多年一线教学经验，深刻理解学生学习痛点和教师教学需求。
+                                致力于将马克思主义哲学与数学教育相结合，创立了独特的"六脉神剑"教学方法论。
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-2">项目贡献</h4>
+                            <ul class="space-y-1 text-slate-300">
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    <span>六脉神剑哲学体系设计</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    <span>题型库内容架构规划</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    <span>教育理念指导</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    <span>用户体验设计</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card rounded-2xl p-8">
+                    <div class="flex items-center space-x-6 mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                            <span class="text-3xl font-bold text-white">千</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-400">AI千问</h3>
+                            <p class="text-slate-300">AI技术专家</p>
+                            <p class="text-slate-400 text-sm">人工智能技术专家</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-2">专业背景</h4>
+                            <p class="text-slate-300">
+                                人工智能技术专家，专注于教育科技领域的AI应用开发。
+                                在机器学习、自然语言处理、知识图谱等方面有深厚技术积累，
+                                致力于将前沿AI技术应用于教育实践。
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-2">项目贡献</h4>
+                            <ul class="space-y-1 text-slate-300">
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span>系统架构设计</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span>AI算法实现</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span>技术方案制定</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span>开发实施指导</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目特色 -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">项目特色</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    融合哲学智慧与AI技术，创造独特的教育体验
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-4">哲学指导</h3>
+                    <p class="text-slate-300">
+                        以马克思主义哲学为指导，将抽象的哲学原理转化为具体的解题方法，
+                        培养学生的哲学思维和科学精神。
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-4">智能技术</h3>
+                    <p class="text-slate-300">
+                        运用先进的AI技术，实现智能题目识别、个性化学习推荐、
+                        思维过程可视化等创新功能。
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-4">人文关怀</h3>
+                    <p class="text-slate-300">
+                        关注每个学生的个体差异，提供温暖的学习支持和心理疏导，
+                        让技术服务于人的全面发展。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系信息 -->
+    <section class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-amber-400 mb-6">联系我们</h2>
+                <p class="text-xl text-slate-300">
+                    让我们一起为数学教育事业贡献力量
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">邮箱联系</h3>
+                    <p class="text-slate-300 mb-2">武文豪：zhangxm_zjf@163.com</p>
+                    <p class="text-slate-300">武文豪-三会数学</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">在线交流</h3>
+                    <p class="text-slate-300 mb-2">电话：18043377396</p>
+                    <p class="text-slate-300">微信：wwh-shsx</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400 mb-3">办公地址</h3>
+                    <p class="text-slate-300 mb-2">吉林省长春市汽车产业开发区</p>
+                    <p class="text-slate-300">邮箱：zhangxm_zjf@163.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-slate-900/50 py-12 border-t border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                    <span class="text-slate-900 font-bold text-sm">哲</span>
+                </div>
+                <span class="text-xl font-bold text-amber-400">哲数理化跨学科智能体</span>
+            </div>
+            <p class="text-slate-400 mb-4">
+                武文豪-三会数学 | 基于马克思主义哲学的智能数学教育系统
+            </p>
+            <p class="text-slate-500 text-sm">
+                © 2024 哲数理化跨学科智能体项目. 融合哲学思维与AI技术，创新数学教育模式.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            animateElements();
+        });
+
+        // 动画效果
+        function animateElements() {
+            // 团队卡片动画
+            anime({
+                targets: '.team-card',
+                translateY: [50, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(300),
+                duration: 800,
+                easing: 'easeOutExpo'
+            });
+
+            // 特色功能动画
+            anime({
+                targets: '.text-center',
+                scale: [0.8, 1],
+                opacity: [0, 1],
+                delay: anime.stagger(200),
+                duration: 600,
+                easing: 'easeOutBack'
+            });
+
+            // 浮动元素动画
+            anime({
+                targets: '.floating-element',
+                translateY: [-10, 10],
+                duration: 3000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine'
+            });
+        }
+    </script>
+</body>
+</html>
